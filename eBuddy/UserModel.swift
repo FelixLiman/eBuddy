@@ -21,6 +21,13 @@ struct UserModel: Codable, Identifiable {
         case gender = "ge"
     }
     
+    init(uid: String?, email: String?, phoneNumber: String?, gender: Int) {
+        self.uid = uid
+        self.email = email
+        self.phoneNumber = phoneNumber
+        self.gender = UserGender(rawValue: gender)
+    }
+    
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.uid = try container.decodeIfPresent(String.self, forKey: .uid)
@@ -42,5 +49,9 @@ enum UserGender: Int, Codable {
         case .female: return "Female"
         case .male: return "Male"
         }
+    }
+    
+    static func random() -> UserGender {
+        return UserGender(rawValue: Int.random(in: 0...1))!
     }
 }

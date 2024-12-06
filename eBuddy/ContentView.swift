@@ -11,12 +11,21 @@ struct ContentView: View {
     @ObservedObject var viewModel: ContentViewModel = ContentViewModel()
     
     var body: some View {
-        List(viewModel.users, id: \.id) { user in
-            VStack(alignment: .leading) {
-                Text("\(user.uid ?? "")")
-                Text("\(user.email ?? "")")
-                Text("\(user.phoneNumber ?? "")")
-                Text("\(user.gender?.asString() ?? "")")
+        NavigationStack {
+            List(viewModel.users, id: \.id) { user in
+                VStack(alignment: .leading) {
+                    Text("\(user.uid ?? "")")
+                    Text("\(user.email ?? "")")
+                    Text("\(user.phoneNumber ?? "")")
+                    Text("\(user.gender?.asString() ?? "")")
+                }
+            }
+            .toolbar {
+                ToolbarItem(id: "add", placement: .navigationBarTrailing) {
+                    Button(action: viewModel.addUser) {
+                        Image(systemName: "plus")
+                    }
+                }
             }
         }
         .onAppear {
