@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct CardRatingView: View {
-    var rating: String
+    var rating: Double
     var ratingCount: Int
+    
+    init(rating: Double?, ratingCount: Int?) {
+        self.rating = rating ?? 0
+        self.ratingCount = ratingCount ?? 0
+    }
     
     var body: some View {
         HStack(spacing: 0) {
@@ -18,7 +23,7 @@ struct CardRatingView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 32, height: 32)
                 .padding([.leading], 18)
-            Text(rating)
+            Text(String(format: "%.2f", rating))
                 .font(.system(size: 20, weight: .bold))
                 .padding([.leading], 8)
             Text("(\(ratingCount))")
@@ -31,5 +36,5 @@ struct CardRatingView: View {
 }
 
 #Preview {
-    CardRatingView(rating: "4.9", ratingCount: 61)
+    CardRatingView(rating: 4.9, ratingCount: 61)
 }

@@ -11,6 +11,11 @@ struct CardHeaderView: View {
     @Environment(\.colorScheme) var colorScheme
     let name: String
     let isOnline: Bool
+    
+    init(name: String?, isOnline: Bool?) {
+        self.name = name ?? "Unknown"
+        self.isOnline = isOnline ?? false
+    }
 
     var body: some View {
         HStack {

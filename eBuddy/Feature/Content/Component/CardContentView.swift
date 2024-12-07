@@ -12,17 +12,19 @@ struct CardContentView: View {
     var viewModel: ContentViewModel
     var gameImg: String
     var moreGameImg: String
+    var gender: UserGender
     
-    init(viewModel: ContentViewModel, gamesImg: [String]) {
+    init(viewModel: ContentViewModel, gender: UserGender?, games: [String]?) {
         self.viewModel = viewModel
-        self.gameImg = gamesImg.first ?? ""
-        self.moreGameImg = gamesImg.dropFirst().first ?? ""
+        self.gender = gender ?? .female
+        self.gameImg = games?.first ?? ""
+        self.moreGameImg = games?.dropFirst().first ?? ""
     }
     
     var body: some View {
         ZStack(alignment: .topLeading) {
             ZStack(alignment: .bottom) {
-                Image(colorScheme == .dark ? "img_gamer_man" : "img_gamer_girl")
+                Image(gender == .male ? "img_gamer_man" : "img_gamer_girl")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .cornerRadius(32)
@@ -81,7 +83,7 @@ struct CardContentView: View {
     
     var voiceButton: some View {
         Button {
-            viewModel.setupToAddUser(count: 10)
+            viewModel.setupToAddUser(count: 5)
         } label: {
             ZStack {
                 Circle()

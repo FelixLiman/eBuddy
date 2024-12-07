@@ -11,12 +11,10 @@ struct CardPricingView: View {
     @Environment(\.colorScheme) var colorScheme
     let nominal: String
     let decimal: String
-    let priceDuration: Int
     
-    init(price: String, priceDuration: Int) {
-        nominal = price.components(separatedBy: ".").first ?? ""
-        decimal = price.components(separatedBy: ".").last ?? ""
-        self.priceDuration = priceDuration
+    init(price: Double?) {
+        nominal = "\(price ?? 0)".components(separatedBy: ".").first ?? ""
+        decimal = "\(price ?? 0)".components(separatedBy: ".").last ?? ""
     }
     
     var body: some View {
@@ -30,7 +28,7 @@ struct CardPricingView: View {
                 Text(nominal)
                     .font(.system(size: 24, weight: .bold))
                     .padding([.leading], 8)
-                Text(".\(decimal)/\(priceDuration)Hr")
+                Text(".\(decimal)/1Hr")
                     .font(.system(size: 16))
                     .padding([.bottom], 3)
             }
@@ -40,5 +38,5 @@ struct CardPricingView: View {
 }
 
 #Preview {
-    CardPricingView(price: "100.00", priceDuration: 1)
+    CardPricingView(price: 110.00)
 }

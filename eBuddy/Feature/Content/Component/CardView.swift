@@ -10,25 +10,23 @@ import SwiftUI
 struct CardView: View {
     @Environment(\.colorScheme) var colorScheme
     var viewModel: ContentViewModel
-    let name: String
-    let isOnline: Bool
-    let gamesImg: [String]
-    let rating: String
-    let ratingCount: Int
-    let price: String
-    let priceDuration: Int
+    var user: UserModel
     
     var body: some View {
         VStack {
             Spacer(minLength: 24)
-            CardHeaderView(name: name, isOnline: isOnline)
+            CardHeaderView(name: user.name,
+                           isOnline: user.isOnline)
                 .padding([.leading, .trailing], 24)
             Spacer(minLength: 24)
-            CardContentView(viewModel: viewModel, gamesImg: gamesImg)
+            CardContentView(viewModel: viewModel,
+                            gender: user.gender,
+                            games: user.games)
             Spacer(minLength: 24)
-            CardRatingView(rating: rating, ratingCount: ratingCount)
+            CardRatingView(rating: user.rating,
+                           ratingCount: user.ratingCount)
             Spacer(minLength: 16)
-            CardPricingView(price: price, priceDuration: priceDuration)
+            CardPricingView(price: user.price)
             Spacer(minLength: 16)
         }
         .background(colorScheme == .dark ? Color.black : Color.white)

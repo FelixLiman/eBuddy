@@ -13,20 +13,33 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            CardView(viewModel: viewModel,
-                     name: "Zynx",
-                     isOnline: true,
-                     gamesImg: ["img_game1", "img_game2"],
-                     rating: "4.9",
-                     ratingCount: 61,
-                     price: "100.00",
-                     priceDuration: 1
-            )
-            .shadow(color: (colorScheme == .dark ? Color.white   : Color.black).opacity(0.4), radius: 8)
-            .padding()
+            ZStack {
+                if viewModel.isFetching {
+                    Text("Fetching Data")
+                } else {
+                    Button {
+                        viewModel.setupToAddUser(count: 10)
+                    } label: {
+                        VStack {
+                            Text("You have swiped all the users!")
+                            Text("Press here to add more users")
+                        }
+                    }
+                }
+                ForEach(viewModel.showUserData.reversed(), id: \.uid) { user in
+                    Button {
+                        viewModel.discardAndUpdate()
+                    } label: {
+                        CardView(viewModel: viewModel, user: user)
+                            .shadow(color: (colorScheme == .dark ? Color.white : Color.black).opacity(0.4), radius: 8)
+                            .padding()
+                            .transition(.move(edge: .leading))
+                    }
+                }
+            }
         }
         .onAppear {
-            viewModel.fetchUsers()
+            viewModel.fetchOrderedUsers()
         }
     }
 }
