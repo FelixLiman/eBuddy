@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CardPricingView: View {
+    @Environment(\.colorScheme) var colorScheme
     let nominal: String
     let decimal: String
     let priceDuration: Int
@@ -20,7 +21,7 @@ struct CardPricingView: View {
     
     var body: some View {
         HStack(spacing: 0) {
-            Image("ic_mana")
+            Image(colorScheme == .dark ? "ic_mana_dark" : "ic_mana")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 32, height: 32)

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.colorScheme) var colorScheme
     @ObservedObject var viewModel: ContentViewModel
     
     var body: some View {
@@ -21,7 +22,7 @@ struct ContentView: View {
                      price: "100.00",
                      priceDuration: 1
             )
-            .shadow(color: Color.black.opacity(0.4), radius: 8)
+            .shadow(color: (colorScheme == .dark ? Color.white   : Color.black).opacity(0.4), radius: 8)
             .padding()
         }
         .onAppear {

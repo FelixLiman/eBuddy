@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CardView: View {
+    @Environment(\.colorScheme) var colorScheme
     var viewModel: ContentViewModel
     let name: String
     let isOnline: Bool
@@ -30,7 +31,7 @@ struct CardView: View {
             CardPricingView(price: price, priceDuration: priceDuration)
             Spacer(minLength: 16)
         }
-        .background(Color.white)
+        .background(colorScheme == .dark ? Color.black : Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 32))
     }
 }

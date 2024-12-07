@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CardHeaderView: View {
+    @Environment(\.colorScheme) var colorScheme
     let name: String
     let isOnline: Bool
 
@@ -28,7 +29,7 @@ struct CardHeaderView: View {
                 .resizable()
                 .renderingMode(.template)
                 .aspectRatio(contentMode: .fit)
-                .foregroundStyle(Color.black)
+                .foregroundStyle(colorScheme == .dark ? Color.white : Color.black)
                 .frame(width: 28, height: 28)
         }
     }
