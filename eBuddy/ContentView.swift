@@ -22,7 +22,9 @@ struct ContentView: View {
             }
             .toolbar {
                 ToolbarItem(id: "add", placement: .navigationBarTrailing) {
-                    Button(action: viewModel.addUser) {
+                    Button {
+                        viewModel.setupToAddUser(count: 10)
+                    } label: {
                         Image(systemName: "plus")
                     }
                 }
