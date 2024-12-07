@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var viewModel: ContentViewModel = ContentViewModel()
+    @ObservedObject var viewModel: ContentViewModel
     
     var body: some View {
         NavigationStack {
-            List(viewModel.users, id: \.id) { user in
+            List(viewModel.userData.users, id: \.id) { user in
                 VStack(alignment: .leading) {
                     Text("\(user.uid ?? "")")
                     Text("\(user.email ?? "")")
@@ -34,8 +34,4 @@ struct ContentView: View {
             viewModel.fetchUsers()
         }
     }
-}
-
-#Preview {
-    ContentView()
 }

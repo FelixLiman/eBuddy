@@ -18,10 +18,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct eBuddyApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject var userData = UserData()
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(viewModel: ContentViewModel(userData: userData))
+                .environmentObject(userData)
         }
     }
 }
