@@ -22,7 +22,7 @@ struct eBuddyApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(viewModel: ContentViewModel(userData: userData))
+            ContentView(viewModel: ContentViewModel(userData: UserData()))
                 .environmentObject(userData)
         }
     }

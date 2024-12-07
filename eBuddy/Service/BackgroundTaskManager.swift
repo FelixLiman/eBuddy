@@ -21,6 +21,7 @@ class BackgroundTaskManager {
     }
     
     func endBackgroundTask() {
+        print("Ended background task")
         UIApplication.shared.endBackgroundTask(backgroundTaskID)
     }
 }

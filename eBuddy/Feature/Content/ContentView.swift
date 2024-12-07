@@ -12,26 +12,24 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            List(viewModel.userData.users, id: \.id) { user in
-                VStack(alignment: .leading) {
-                    Text("\(user.uid ?? "")")
-                    Text("\(user.email ?? "")")
-                    Text("\(user.phoneNumber ?? "")")
-                    Text("\(user.gender?.asString() ?? "")")
-                }
-            }
-            .toolbar {
-                ToolbarItem(id: "add", placement: .navigationBarTrailing) {
-                    Button {
-                        viewModel.setupToAddUser(count: 10)
-                    } label: {
-                        Image(systemName: "plus")
-                    }
-                }
-            }
+            CardView(viewModel: viewModel,
+                     name: "Zynx",
+                     isOnline: true,
+                     gamesImg: ["img_game1", "img_game2"],
+                     rating: "4.9",
+                     ratingCount: 61,
+                     price: "100.00",
+                     priceDuration: 1
+            )
+            .shadow(color: Color.black.opacity(0.4), radius: 8)
+            .padding()
         }
         .onAppear {
             viewModel.fetchUsers()
         }
     }
+}
+
+#Preview {
+    ContentView(viewModel: ContentViewModel(userData: UserData()))
 }
